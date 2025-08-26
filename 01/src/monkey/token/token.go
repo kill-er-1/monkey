@@ -38,8 +38,40 @@ const (
 	//运算符
 	ASSIGN = "="
 	PLUS   = "+"
+	MINUS  = "-"
+	BANG   = "!"
+	ASTERISK = "*"
+	SLASH  = "/"
+
+	LT     = "<"
+	GT     = ">"
+	//双字符运算符
+	EQ     = "=="
+	NOT_EQ = "!="
 
 	//关键字
 	LET    = "let"
 	FUNCTION = "function"
+	IF       = "if"
+	ELSE     = "else"
+	RETURN   = "return"
+	TRUE     = "true"
+	FALSE    = "false"
 )
+
+var keywords = map[string]TokenType {
+	"let": LET,
+	"fn": FUNCTION,
+	"if": IF,
+	"else": ELSE,
+	"return": RETURN,
+	"true": TRUE,
+	"false": FALSE,
+}
+//用于区分标识符与关键字
+func LookupIdent(ident string) TokenType {
+	if tok,ok := keywords[ident];ok {
+		return tok
+	}
+	return IDENT
+}
